@@ -1,0 +1,22 @@
+{
+  "name": "ecs-engine",
+  "version": "0.0.0",
+  "author": "Kasper Mol <awsumthx@gmail.com>",
+  "scripts": {
+    "symlink": "ln -s src/engine node_modules/engine",
+    "watch": "npm-run-all --parallel watch:* server",
+    "watch:webpack": "webpack --watch",
+    "watch:static": "cpx 'static/**/*' dist",
+    "server": "node server.js"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "express": "^4.15.3",
+    "npm-run-all": "^4.0.2",
+    "ts": "^0.0.0",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
+    "webpack": "^2.6.1",
+    "webpack-closure-compiler": "^2.1.4"
+  }
+}
