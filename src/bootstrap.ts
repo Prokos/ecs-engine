@@ -1,6 +1,12 @@
+import 'setup';
+
 import onDOMReady from 'utils/onDOMReady';
-import Game from 'game/Game';
+import Scene from 'core/Scene';
+
+import CreateCanvasSystem from 'systems/CreateCanvasSystem';
 
 onDOMReady(() => {
-	Game.init();
+	const mainScene = new Scene([
+		new CreateCanvasSystem(),
+	]);
 });
