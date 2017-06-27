@@ -1,12 +1,17 @@
-import { System, InitSystem, UpdateSystem } from 'core/System';
+import { System, InitSystem, ReactiveSystem, UpdateSystem } from 'core/System';
+import ReactiveHelper from 'core/ReactiveHelper';
 
 export default class Scene {
 	private initSystems:InitSystem[];
-	private updateSystems:InitSystem[];
+	private reactiveSystems:ReactiveSystem[];
+	private updateSystems:UpdateSystem[];
 
 	constructor(systems:System[]) {
 		this.initSystems = systems.find(InitSystem);
+		this.reactiveSystems = systems.find(ReactiveSystem);
 		this.updateSystems = systems.find(UpdateSystem);
+
+		ReactiveHelper.registerSystems(this.reactiveSystems);
 
 		this.initSystems.forEach(system => system.run());
 
