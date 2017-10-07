@@ -11,7 +11,6 @@ export default class FullScreenCanvasSystem extends ReactiveSystem {
 		components.forEach((component:CanvasComponent) => {
 			component.canvas.width = window.innerWidth;
 			component.canvas.height = window.innerHeight;
-			component.canvas.id = Math.random().toString();
 		});
 	}
 }

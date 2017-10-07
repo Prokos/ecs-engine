@@ -23,5 +23,5 @@ export enum ReactMode {
 
 export interface IReactiveSetup<T extends Component> {
 	mode: ReactMode,
-	component: T,
+	components: T[],
 }

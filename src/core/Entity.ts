@@ -1,5 +1,4 @@
 import Component from 'core/Component';
-import ReactiveHelper from 'core/ReactiveHelper';
 
 export default class Entity {
 	private components:Component[];
@@ -9,6 +8,6 @@ export default class Entity {
 	}
 
 	get(component:any):any {
-		return ReactiveHelper.proxyComponent(this.components.filter((c:any) => c instanceof component)[0]);
+		return this.components.find(component)[0];
 	}
 };

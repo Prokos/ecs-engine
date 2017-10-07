@@ -13,9 +13,13 @@ abstract class Component {
 				value,
 				writable: true,
 			});
-
-			this.notify(ReactMode.CREATE);
 		});
+
+		requestAnimationFrame(() => {
+			this.notify(ReactMode.CREATE)
+		});
+
+		return ReactiveHelper.proxyComponent(this);
 	}
 
 	get name():string {
@@ -36,7 +40,7 @@ abstract class Component {
 		if (!prototype.notifiers[mode]) return;
 
 		prototype.notifiers[mode].forEach((system:ReactiveSystem) => {
-			system.run([ReactiveHelper.proxyComponent(this)]); // todo: should only call once per component type
+			system.run([this]); // todo: should only call once per component type
 		});
 	}
 }

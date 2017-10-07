@@ -4,7 +4,6 @@ import CanvasComponent from 'components/CanvasComponent';
 
 export default () => new Entity([
 	new CanvasComponent({
-		canvas: document.createElement('canvas'),
-		test: Math.random(),
+		canvas: document.createElement('canvas')
 	}),
 ]);
