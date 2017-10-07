@@ -5,6 +5,8 @@ abstract class Component {
 	static notifiers:any = {}; // @TODO: do normal
 
 	constructor(props:any) {
+		const { ...keys } = props;
+		
 		Object.keys(props).forEach((key:any) => {
 			const value:any = props[key];
 			Object.defineProperty(this, key, {
@@ -34,7 +36,7 @@ abstract class Component {
 		if (!prototype.notifiers[mode]) return;
 
 		prototype.notifiers[mode].forEach((system:ReactiveSystem) => {
-			system.run([ReactiveHelper.proxyComponent(this)]); // todo: should only call once per component
+			system.run([ReactiveHelper.proxyComponent(this)]); // todo: should only call once per component type
 		});
 	}
 }

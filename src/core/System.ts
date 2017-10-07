@@ -10,7 +10,7 @@ export abstract class UpdateSystem extends System {
 }
 
 export abstract class ReactiveSystem extends System {
-	abstract listensTo:IReactiveSetup[];
+	abstract listensTo:IReactiveSetup<any>[];
 	abstract run(components:Component[]):void;
 }
 
@@ -19,9 +19,9 @@ export enum ReactMode {
 	CREATE = 1,
 	UPDATE = 2,
 	DESTROY = 3,
-};
+}
 
-export interface IReactiveSetup {
+export interface IReactiveSetup<T extends Component> {
 	mode: ReactMode,
-	component: Component,
-};
+	component: T,
+}

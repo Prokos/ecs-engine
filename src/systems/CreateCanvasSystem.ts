@@ -6,7 +6,21 @@ import CanvasComponent from 'components/CanvasComponent';
 
 export default class CreateCanvasSystem extends InitSystem {
 	run():void {
-		const entity:Entity = Pool.create(GameCanvasEntity);
-		document.body.appendChild(entity.get(CanvasComponent).canvas);
+		const entities:any = [];
+
+		for (var i = 0;i < 15;i++) {
+			const entity:Entity = Pool.create(GameCanvasEntity);
+
+			// Create and append canvas
+			let component:CanvasComponent = entity.get(CanvasComponent);
+			component.canvas = document.createElement('canvas');
+			document.body.appendChild(component.canvas);
+
+			entities.push(entity);
+		}
+
+		entities.forEach((entity:any) => {
+			console.log(entity.get(CanvasComponent).test, entity.get(CanvasComponent).test2);
+		});
 	}
 }

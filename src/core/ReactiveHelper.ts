@@ -1,16 +1,33 @@
 import Component from 'core/Component';
 import { ReactiveSystem, ReactMode, IReactiveSetup } from 'core/System';
 
+/**
+ * ReactiveHelper
+ * 
+ * The communication layer between ReactiveSystems and Components
+ */
+
 export default class ReactiveHelper {
 	static proxies:any[] = [];
 
 	static registerSystems(systems:ReactiveSystem[]):void {
+		// Enable notifiers for each component for each system's listeners
 		systems.forEach((system:ReactiveSystem) => {
-			system.listensTo.forEach((listen:IReactiveSetup) => {
-				Object.getPrototypeOf(listen.component).enableNotifier(listen.mode, system);
+			system.listensTo.forEach((listen:IReactiveSetup<any>) => {
+				listen.components.map(c => Object.getPrototypeOf(c))
+					.forEach(component => {
+						component.enableNotifier(listen.mode, system);
+					});
 			});
 		});
 	}
+
+	/**
+	 * Proxy the given component, in order to intercept the getting
+	 * and setting of its properties
+	 * 
+	 * @param component 
+	 */
 
 	static proxyComponent(component:any):any {
 		if (!ReactiveHelper.proxies[component.name]) {
