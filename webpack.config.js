@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
     entry: './src/bootstrap.ts',
     output: {
-        filename: './dist/min.js',
+        filename: './dist/game.min.js',
     },
     resolve: {
         extensions: ['.ts', '.js'],

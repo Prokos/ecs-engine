@@ -10,9 +10,11 @@ export default class Scene {
 		this.initSystems = systems.find(InitSystem);
 		this.reactiveSystems = systems.find(ReactiveSystem);
 		this.updateSystems = systems.find(UpdateSystem);
+	}
 
+	public start():void {
 		ReactiveHelper.registerSystems(this.reactiveSystems);
-
+		
 		this.initSystems.forEach(system => system.run());
 
 		this.update();

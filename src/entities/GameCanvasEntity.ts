@@ -2,8 +2,11 @@ import Entity from 'core/Entity';
 
 import CanvasComponent from 'components/CanvasComponent';
 
-export default () => new Entity([
-	new CanvasComponent({
-		canvas: document.createElement('canvas')
-	}),
-]);
+export default () => {
+	const canvas = document.createElement('canvas');
+	const context = canvas.getContext('2d');
+
+	return new Entity([
+		new CanvasComponent({ canvas, context }),
+	]);
+};

@@ -3,15 +3,18 @@ import { UpdateSystem } from 'core/System';
 import GameCanvasEntity from 'entities/GameCanvasEntity';
 import CanvasComponent from 'components/CanvasComponent';
 
-export default class ClearCanvasSystem extends UpdateSystem {
+export default class WriteTimeSystem extends UpdateSystem {
 	run():void {
 		const canvasComponents:CanvasComponent[] = Pool.get(CanvasComponent);
 
 		canvasComponents.forEach(component => {
-			const { canvas } = component;
-			const context:CanvasRenderingContext2D = canvas.getContext('2d');
-
-			context.clearRect(0, 0, canvas.width, canvas.height);
+			const { canvas, context } = component;
+			
+			context.font = '48px Arial';
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+			
+			context.fillText(Math.round(performance.now() / 1000).toString(), canvas.width / 2, canvas.height / 2);
 		});
 	}
 }
