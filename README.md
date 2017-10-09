@@ -1,3 +1,11 @@
 # ECS Engine (working title)
 
-Core topkek
+WIP of an Entity Component System engine in Typescript.
+
+### TODO
+
+1. Figure out how to handle events / triggers (input, window resize etc.)
+1. Figure out object lifecycles (entities, components, component properties?)
+1. Figure out scene lifecycles
+1. Can we remove some of the `:any` types?
+1. etc...
