@@ -43,13 +43,7 @@ export default class ReactiveHelper {
 				const currValue = target[name];
 				target[name] = value;
 				
-				if(currValue === undefined) {
-					target.notify(ReactMode.CREATE);
-				} else if (value === undefined || value === null) {
-					target.notify(ReactMode.DESTROY);
-				} else if (value !== currValue) {
-					target.notify(ReactMode.UPDATE);
-				}
+				target.notify(ReactMode.UPDATE);
 
 				return true;
 			}

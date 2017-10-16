@@ -19,6 +19,9 @@ abstract class Component {
 			this.notify(ReactMode.CREATE)
 		});
 
+		// @TODO: Let's not do this with proxies, also we're hacking a constructor
+		// We should really just use defineProperty to make sure we send ReactMode.UPDATE upon changes
+
 		return ReactiveHelper.proxyComponent(this);
 	}
 
@@ -42,6 +45,11 @@ abstract class Component {
 		prototype.notifiers[mode].forEach((system:ReactiveSystem) => {
 			system.run([this]); // todo: should only call once per component type
 		});
+	}
+
+	public destroy():void {
+		// @TODO: put this into a pool so we can re-use it
+		// this.notify(ReactMode.DESTROY);
 	}
 }
 

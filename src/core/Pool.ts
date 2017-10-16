@@ -5,6 +5,11 @@ export default class Pool {
 	private static entities:Entity[] = [];
 	private static components:Component[] = [];
 
+	// @TODO: createEntity and createComponent
+	// should we combine these? (as entities can contain entities for example?)
+	// otherwise, get() should also have a separate call for entities and components
+	// in any case, entities and components should be created in the same fashion to avoid confusion
+
 	public static createEntity(entityCreator:() => Entity):Entity {
 		const entity:Entity = entityCreator();
 		this.entities.push(entity);
