@@ -14,10 +14,9 @@ export default class ReactiveHelper {
 		// Enable notifiers for each component for each system's listeners
 		systems.forEach((system:ReactiveSystem) => {
 			system.listensTo.forEach((listen:IReactiveSetup<any>) => {
-				listen.components.map(c => Object.getPrototypeOf(c))
-					.forEach(component => {
-						component.enableNotifier(listen.mode, system);
-					});
+				listen.components.forEach(component => {
+					Component.enableNotifier(component, listen.mode, system);
+				})
 			});
 		});
 	}

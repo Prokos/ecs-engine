@@ -11,7 +11,7 @@ export abstract class UpdateSystem extends System {
 
 export abstract class ReactiveSystem extends System {
 	abstract listensTo:IReactiveSetup<any>[];
-	abstract run(components:Component[]):void;
+	abstract run():void;
 }
 
 export enum ReactMode {

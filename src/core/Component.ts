@@ -4,11 +4,10 @@ import ReactiveHelper from 'core/ReactiveHelper';
 abstract class Component {
 	static notifiers:any = {}; // @TODO: do normal
 
-	constructor(props:any) {
-		const { ...keys } = props;
-		
+	constructor(props:any = {}) {		
 		Object.keys(props).forEach((key:any) => {
 			const value:any = props[key];
+
 			Object.defineProperty(this, key, {
 				value,
 				writable: true,
@@ -16,7 +15,7 @@ abstract class Component {
 		});
 
 		requestAnimationFrame(() => {
-			this.notify(ReactMode.CREATE)
+			this.notify(ReactMode.CREATE);
 		});
 
 		// @TODO: Let's not do this with proxies, also we're hacking a constructor
@@ -29,21 +28,23 @@ abstract class Component {
 		return this.constructor.name;
 	}
 
-	public static enableNotifier(mode:ReactMode, system:ReactiveSystem):void {
-		if (!this.notifiers[mode]) this.notifiers[mode] = [];
-		if (this.notifiers[mode].indexOf(system) !== -1) throw `Attempting duplicate notifier for ${system}`;
+	public static enableNotifier(type:any, mode:ReactMode, system:ReactiveSystem):void {
+		if (!this.notifiers[type]) this.notifiers[type] = [];
+		if (!this.notifiers[type][mode]) this.notifiers[type][mode] = [];
+		if (this.notifiers[type][mode].indexOf(system) !== -1) throw `Attempting duplicate notifier for ${system}`;
 		
-		this.notifiers[mode].push(system);
+		this.notifiers[type][mode].push(system);
 	}
 
 	public notify(mode:ReactMode):void {
 		const prototype:any = this.constructor;
 
-		if (prototype.notifiers[ReactMode.ALL]) mode = ReactMode.ALL;
-		if (!prototype.notifiers[mode]) return;
+		if (prototype.notifiers[prototype][ReactMode.ALL]) mode = ReactMode.ALL;
+		if (!prototype.notifiers[prototype][mode]) return;
 
-		prototype.notifiers[mode].forEach((system:ReactiveSystem) => {
-			system.run([this]); // todo: should only call once per component type
+		prototype.notifiers[prototype][mode].forEach((system:ReactiveSystem) => {
+			// @TODO: should only call once per component type
+			system.run();
 		});
 	}
 
