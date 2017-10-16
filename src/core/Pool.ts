@@ -3,8 +3,9 @@ import Entity from 'core/Entity';
 
 export default class Pool {
 	private static entities:Entity[] = [];
+	private static components:Component[] = [];
 
-	public static create(entityCreator:() => Entity):Entity {
+	public static createEntity(entityCreator:() => Entity):Entity {
 		const entity:Entity = entityCreator();
 		this.entities.push(entity);
 
@@ -16,8 +17,14 @@ export default class Pool {
 			return this.entities.find(item);
 		} else {
 			return this.entities.reduce((prev, curr) => {
-				return prev.concat(curr.get(item)); 
+				return prev.concat(curr.getComponent(item)); 
 			}, []);
 		}
+	}
+
+	public static createComponent(componentConstructor:any) {
+		const component:Component = new componentConstructor();
+		this.components.push(component);
+		return component;
 	}
 }

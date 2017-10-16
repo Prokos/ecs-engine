@@ -1,11 +1,15 @@
 import { ReactiveSystem, IReactiveSetup, ReactMode } from 'core/System';
 import CanvasComponent from 'components/CanvasComponent';
+import WindowResizeComponent from 'components/WindowResizeComponent';
 
-export default class FullScreenCanvasSystem extends ReactiveSystem {
+export default class FullScreenCanvasSystem implements ReactiveSystem {
 	listensTo:IReactiveSetup<any>[] = [{
 		mode: ReactMode.CREATE,
-		components: [CanvasComponent],
-	}];
+		components: [
+			CanvasComponent,
+			WindowResizeComponent,
+		],
+	},];
 
 	run(components:any):void {
 		components.forEach((component:CanvasComponent) => {

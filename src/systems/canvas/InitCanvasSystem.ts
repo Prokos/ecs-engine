@@ -4,10 +4,10 @@ import Pool from 'core/Pool';
 import GameCanvasEntity from 'entities/GameCanvasEntity';
 import CanvasComponent from 'components/CanvasComponent';
 
-export default class CreateCanvasSystem extends InitSystem {
+export default class CreateCanvasSystem implements InitSystem {
 	run():void {
-		const entity:Entity = Pool.create(GameCanvasEntity);
-		const component:CanvasComponent = entity.get(CanvasComponent);
+		const entity:Entity = Pool.createEntity(GameCanvasEntity);
+		const component:CanvasComponent = entity.getComponent(CanvasComponent);
 		
 		document.body.appendChild(component.canvas);
 	}

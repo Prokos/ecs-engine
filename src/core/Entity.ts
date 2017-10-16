@@ -7,7 +7,7 @@ export default class Entity {
 		this.components = components;
 	}
 
-	get(component:any):any {
+	getComponent(component:any):any {
 		return this.components.find(component)[0];
 	}
 };

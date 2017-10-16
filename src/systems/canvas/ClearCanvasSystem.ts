@@ -3,7 +3,7 @@ import { UpdateSystem } from 'core/System';
 import GameCanvasEntity from 'entities/GameCanvasEntity';
 import CanvasComponent from 'components/CanvasComponent';
 
-export default class ClearCanvasSystem extends UpdateSystem {
+export default class ClearCanvasSystem implements UpdateSystem {
 	run():void {
 		const canvasComponents:CanvasComponent[] = Pool.get(CanvasComponent);
 
