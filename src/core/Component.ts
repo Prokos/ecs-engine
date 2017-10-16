@@ -1,3 +1,4 @@
+import Pool from 'core/Pool';
 import { ReactiveSystem, ReactMode } from 'core/System';
 import ReactiveHelper from 'core/ReactiveHelper';
 
@@ -50,8 +51,7 @@ abstract class Component {
 	}
 
 	public destroy():void {
-		// @TODO: put this into a pool so we can re-use it
-		// this.notify(ReactMode.DESTROY);
+		Pool.destroyComponent(this);
 	}
 }
 

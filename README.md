@@ -8,6 +8,7 @@ WIP of an Entity Component System engine in Typescript.
 1. Figure out object lifecycles (entities, components, component properties?)
 1. Figure out scene lifecycles
 1. Figure out directory structure
+1. Remove dependency on requestAnimationFrame, use ticks instead
 1. Performance testing
 1. Finalise syntax
 1. Can we remove some of the `:any` types?

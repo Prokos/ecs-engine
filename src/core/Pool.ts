@@ -1,5 +1,6 @@
 import Component from 'core/Component';
 import Entity from 'core/Entity';
+import { ReactMode } from 'core/System';
 
 export default class Pool {
 	private static entities:Entity[] = [];
@@ -30,6 +31,21 @@ export default class Pool {
 	public static createComponent(componentConstructor:any) {
 		const component:Component = new componentConstructor();
 		this.components.push(component);
+
+		// Components that are created directly on the pool are always instantly destroyed next frame
+		requestAnimationFrame(() => {
+			component.destroy();
+		});
+
 		return component;
+	}
+
+	public static destroyComponent(component:Component):void {
+		const index = this.components.indexOf(component);
+
+		if (index > -1) {
+			component.notify(ReactMode.DESTROY);
+			this.components.splice(index, 1);
+		}
 	}
 }
