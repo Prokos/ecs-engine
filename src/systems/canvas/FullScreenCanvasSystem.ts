@@ -12,7 +12,7 @@ export default class FullScreenCanvasSystem extends ReactiveSystem {
 		],
 	},];
 
-	run():void {
+	run(components:any[]):void {
 		Pool.get(CanvasComponent).forEach((component:CanvasComponent) => {
 			component.canvas.width = window.innerWidth;
 			component.canvas.height = window.innerHeight;

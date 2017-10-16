@@ -43,8 +43,9 @@ abstract class Component {
 		if (!prototype.notifiers[prototype][mode]) return;
 
 		prototype.notifiers[prototype][mode].forEach((system:ReactiveSystem) => {
-			// @TODO: should only call once per component type
-			system.run();
+			// @TODO: should only call once per component type, with all components
+			// instead of every time per single component
+			system.run([this]);
 		});
 	}
 
